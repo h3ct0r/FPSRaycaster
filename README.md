@@ -1,2 +1,7 @@
 # FPSRaycaster
-A FPS game in Javascript using Raycasting
+A FPS game in Javascript using Raycasting. 
+This a extension of the tutorial made by Hunter Loftis (http://www.playfuljs.com/a-first-person-engine-in-265-lines/ and https://github.com/hunterloftis/playfuljs-demos). 
+
+# Controls
+Normal a-w-s-d for left, forward, backards and right movement
+Arrows and mouse movement to rotate

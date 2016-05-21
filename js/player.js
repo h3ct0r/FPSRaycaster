@@ -4,16 +4,13 @@ function Player(x, y, direction) {
     this.direction = direction;
     this.paces = 0;
 
-    var knife = new Bitmap('assets/knife_hand.png', 319, 320);
-    var knife2 = new Bitmap('assets/knife_hand2.png', 319, 320);
+    this.weapons = [
+        new Weapon('Knife', 1, new Bitmap('assets/knife_hand.png', 319, 320)), 
+        new Weapon('Gun', 2, new Bitmap('assets/knife_hand2.png', 319, 320))
+    ];
 
-    this.weapons = [Weapon(1, knife), Weapon(knife2)];
     this.actualWeapon = this.weapons[0];
-}
-
-function Weapon(damage, bitmap) {
-    this.damage = damage;
-    this.bitmap = bitmap;
+    this.actualWeapon.displayInfo();
 }
 
 Player.prototype.rotate = function(angle) {
@@ -33,7 +30,6 @@ Player.prototype.strafe = function(distance, map) {
     var dy = Math.sin(this.direction + 90) * distance;
     if (map.get(this.x + dx, this.y) <= 0) this.x += dx;
     if (map.get(this.x, this.y + dy) <= 0) this.y += dy;
-    this.paces += distance;
 }
 
 Player.prototype.update = function(controls, map, seconds) {
@@ -43,6 +39,12 @@ Player.prototype.update = function(controls, map, seconds) {
     if (controls.backward) this.walk(-3 * seconds, map);
     if (controls.strafe_left) this.strafe(-3 * seconds, map);
     if (controls.strafe_right) this.strafe(3 * seconds, map);
-    if (controls.select_knife) this.actualWeapon[0];
-    if (controls.select_gun) this.actualWeapon[1];
+    if (controls.select_knife){
+        this.actualWeapon = this.weapons[0];
+        this.actualWeapon.displayInfo();
+    }
+    if (controls.select_gun){
+        this.actualWeapon = this.weapons[1];
+        this.actualWeapon.displayInfo();
+    }
 };

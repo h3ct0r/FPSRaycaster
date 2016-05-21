@@ -3,6 +3,7 @@ function Camera(canvas, resolution, focalLength) {
 
     this.width = canvas.width = window.innerWidth * 0.5;
     this.height = canvas.height = window.innerHeight * 0.5;
+
     this.resolution = resolution;
     this.spacing = this.width / resolution;
     this.focalLength = focalLength || 0.8;
@@ -14,7 +15,7 @@ function Camera(canvas, resolution, focalLength) {
 Camera.prototype.render = function(player, map) {
     this.drawSky(player.direction, map.skybox, map.light);
     this.drawColumns(player, map);
-    //this.drawWeapon(player.weapon, player.paces);
+    this.drawWeapon(player.weapon, player.paces);
 };
 
 Camera.prototype.drawSky = function(direction, sky, ambient) {
