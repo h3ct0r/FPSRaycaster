@@ -28,6 +28,9 @@ function Controls() {
     document.addEventListener('keydown', this.onKey.bind(this, true), false);
     document.addEventListener('keyup', this.onKey.bind(this, false), false);
     document.addEventListener('mousemove', this.onMouseMovement.bind(this), false);
+    document.body.onclick = document.body.requestPointerLock || 
+                            document.body.mozRequestPointerLock || 
+                            document.body.webkitRequestPointerLock;
 }
 
 Controls.prototype.onKey = function(val, e) {
@@ -40,6 +43,6 @@ Controls.prototype.onKey = function(val, e) {
 
 Controls.prototype.onMouseMovement = function (e) {
 	var x = (e.movementX || e.mozMovementX || e.webkitMovementX || 0);
-	if (x > 0) player.rotate(Math.PI/40);
-	if (x < 0) player.rotate(-Math.PI/40);
+	if (x > 0) player.rotate(Math.PI/100);
+	if (x < 0) player.rotate(-Math.PI/100);
 };

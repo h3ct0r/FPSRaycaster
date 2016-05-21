@@ -9,6 +9,7 @@
 <body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
     <div style='color:#ffffff; text-align:right;'>FPS:<span id="fps_counter">0</span></div>
     <div style='color:#ffffff; text-align:right;'>Weapon:<span id="msg_weapon">0</span></div>
+    <div style='color:#ffffff; text-align:right;'><button onclick="goFullScreen();">Go Fullscreen</button></div>
     <canvas id='display' width='1' height='1' style='width: 100%; height: 100%;' />
 
     <script type="text/javascript" src="js/control.js"></script>
@@ -26,6 +27,15 @@
             this.image.src = src;
             this.width = width;
             this.height = height;
+        }
+
+        function goFullScreen(){
+            if(display.requestFullScreen)
+                display.requestFullScreen();
+            else if(display.webkitRequestFullScreen)
+                display.webkitRequestFullScreen();
+            else if(display.mozRequestFullScreen)
+                display.mozRequestFullScreen();
         }
 
         var display = document.getElementById('display');
@@ -49,7 +59,7 @@
             fpsCounter += 1;
             map.update(delta);
             player.update(controls.states, map, delta);
-            //camera.render(player, map);
+            camera.render(player, map);
         });
     </script>
 </body>
