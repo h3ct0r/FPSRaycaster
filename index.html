@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FPS Test</title>
+</head>
+
+<body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
+    <div style='color:#ffffff; text-align:right;'>FPS:<span id="fps_counter">0</span></div>
+    <canvas id='display' width='1' height='1' style='width: 100%; height: 100%;' />
+
+    <script type="text/javascript" src="js/control.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/camera.js"></script>
+    <script type="text/javascript" src="js/gameloop.js"></script>
+
+    <script>
+        var CIRCLE = Math.PI * 2;
+
+        function Bitmap(src, width, height) {
+            this.image = new Image();
+            this.image.src = src;
+            this.width = width;
+            this.height = height;
+        }
+
+        var display = document.getElementById('display');
+        var player = new Player(5, 5, Math.PI * 0.4);
+        
+        var map = new Map();
+        map.loadMap();
+
+        var controls = new Controls();
+        //var camera = new Camera(display,320, 0.8);
+        var loop = new GameLoop();
+
+        var fpsCounter = 0;
+        var fpsCounterElem = document.getElementById('fps_counter');
+        window.setInterval(function() {
+            fpsCounterElem.innerHTML = fpsCounter;
+            fpsCounter = 0;
+        }, 1000);
+
+        loop.start(function frame(delta) {
+            fpsCounter += 1;
+            map.update(delta);
+            player.update(controls.states, map, delta);
+            //camera.render(player, map);
+        });
+    </script>
+</body>
+
+</html>
